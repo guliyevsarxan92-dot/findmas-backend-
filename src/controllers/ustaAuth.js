@@ -116,4 +116,19 @@ async function profil(req, res) {
   }
 }
 
-module.exports = { qeydiyyat, giris, onlaynDeyis, konumYenile, fcmTokenYenile, profil };
+// PUT /api/usta/profil
+async function profilYenile(req, res) {
+  try {
+    const { ad, soyad, email } = req.body;
+    if (!ad?.trim() || !soyad?.trim()) {
+      return res.status(400).json({ xeta: 'Ad və soyad boş ola bilməz' });
+    }
+    const usta = await Usta.findByPk(req.usta.id);
+    await usta.update({ ad: ad.trim(), soyad: soyad.trim(), email: email?.trim() || null });
+    res.json({ mesaj: 'Məlumatlar yeniləndi', ad: usta.ad, soyad: usta.soyad, email: usta.email });
+  } catch (err) {
+    res.status(500).json({ xeta: err.message });
+  }
+}
+
+module.exports = { qeydiyyat, giris, onlaynDeyis, konumYenile, fcmTokenYenile, profil, profilYenile };

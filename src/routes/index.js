@@ -16,6 +16,7 @@ router.put('/usta/onlayn', ustaAuth, ustaAuthCtrl.onlaynDeyis);
 router.put('/usta/konum', ustaAuth, ustaAuthCtrl.konumYenile);
 router.put('/usta/fcm-token', ustaAuth, ustaAuthCtrl.fcmTokenYenile);
 router.get('/usta/profil', ustaAuth, ustaAuthCtrl.profil);
+router.put('/usta/profil', ustaAuth, ustaAuthCtrl.profilYenile);
 
 // Sifariş
 const sifarisCtrl = require('../controllers/sifaris');
